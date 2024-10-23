@@ -252,7 +252,7 @@ class ToLogicalPlan(spark: SparkSession) extends DefaultRelVisitor[LogicalPlan] 
   }
 
   override def visit(emptyScan: relation.EmptyScan): LogicalPlan = {
-    LocalRelation(ToSubstraitType.toAttribute(emptyScan.getInitialSchema))
+    LocalRelation(ToSubstraitType.toAttributeSeq(emptyScan.getInitialSchema))
   }
   override def visit(namedScan: relation.NamedScan): LogicalPlan = {
     resolve(UnresolvedRelation(namedScan.getNames.asScala)) match {
