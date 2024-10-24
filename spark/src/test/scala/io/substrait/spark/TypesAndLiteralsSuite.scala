@@ -5,7 +5,7 @@ import io.substrait.spark.expression.{ToSparkExpression, ToSubstraitLiteral}
 import org.apache.spark.SparkFunSuite
 import org.apache.spark.sql.catalyst.expressions.Literal
 import org.apache.spark.sql.catalyst.util.MapData
-import org.apache.spark.sql.types.{ArrayType, BinaryType, BooleanType, DataType, DayTimeIntervalType, DecimalType, DoubleType, FloatType, IntegerType, LongType, MapType, StringType, TimestampNTZType, TimestampType, YearMonthIntervalType}
+import org.apache.spark.sql.types._
 import org.apache.spark.substrait.SparkTypeUtil
 import org.apache.spark.unsafe.types.UTF8String
 
@@ -16,6 +16,8 @@ class TypesAndLiteralsSuite extends SparkFunSuite {
   val toSparkExpression = new ToSparkExpression(null, null)
 
   val types: Seq[DataType] = List(
+    ByteType,
+    ShortType,
     IntegerType,
     LongType,
     FloatType,
@@ -52,6 +54,8 @@ class TypesAndLiteralsSuite extends SparkFunSuite {
   val defaultLiterals: Seq[Literal] = types.map(Literal.default)
 
   val literals: Seq[Literal] = List(
+    Literal(1.toByte),
+    Literal(1.toShort),
     Literal(1),
     Literal(1L),
     Literal(1.0f),
